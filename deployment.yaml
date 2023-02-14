@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-gitops
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: hello-gitops
+  template:
+    metadata:
+      labels:
+        app: hello-gitops
+    spec:
+      containers:
+      # modify the following line with your Docker Hub account name
+      - image: quay.io/rickjwagner/demorepo
+        name: hello-gitops
+        ports:
+        - containerPort: 8080
